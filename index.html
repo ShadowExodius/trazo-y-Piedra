@@ -1,108 +1,98 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <link rel="stylesheet" href="assest/css/style.css"> <!--Ref StyleCss-->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trazo & Piedra</title>
+    <link rel="stylesheet" href="/assest/css/style.css">
 </head>
 <body>
 
-    <!-- MENÚ DE NAVEGACIÓN PRINCIPAL -->
+    <!-- NAVBAR -->
     <header>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Catálogo</a></li>
-                <li><a href="#">Servicios</a></li>
-            </ul>
-        </nav>
+        <ul class="nav-links">
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#">Catálogo</a></li>
+            <li><a href="#">Servicios</a></li>
+        </ul>
         
-        <div>
-            <h1>Trazo & Piedra</h1>
+        <div class="logo">
+            <h1>Trazo &</h1>
+            <p>Piedra</p>
         </div>
         
-        <nav>
-            <ul>
-                <li><a href="#">Contacto</a></li>
-                <li><a href="#">Admin</a></li>
-                <li><a href="#">Bolsa (0)</a></li>
-            </ul>
-        </nav>
+        <ul class="nav-links">
+            <li><a href="#">Contacto</a></li>
+            <li><a href="#">Admin</a></li>
+            <li><a href="#">Bolsa (0)</a></li>
+        </ul>
     </header>
 
-    <!-- SECCIÓN PRINCIPAL (HERO) -->
-    <main>
-        <!-- Contenido textual izquierdo -->
-        <section>
-            <h2>perdura</h2>
+    <!-- MAIN HERO SECTION -->
+    <main class="hero">
+        <div class="hero-content">
+            <h2 class="hero-title">perdura</h2>
             
-            <p>
+            <p class="hero-description">
                 Denim pintado a mano y piezas bordadas en oro, hechas en pequeñas series por nuestras artesanas. Cada prenda nace para una sola persona.
             </p>
             
-            <div>
-                <a href="#">Ver el catálogo</a>
-                <a href="#">Personaliza tu pieza</a>
+            <div class="cta-container">
+                <a href="#" class="btn-primary">Ver el catálogo &rarr;</a>
+                <a href="#" class="btn-secondary">Personaliza tu pieza</a>
             </div>
             
-            <!-- Métricas / Contadores -->
-            <div>
-                <div>
-                    <span>12</span>
-                    <span>Años de oficio</span>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">12</span>
+                    <span class="stat-label">Años de oficio</span>
                 </div>
-                <div>
-                    <span>1 / 1</span>
-                    <span>Piezas únicas</span>
+                <div class="stat-item">
+                    <span class="stat-number">1 / 1</span>
+                    <span class="stat-label">Piezas únicas</span>
                 </div>
-                <div>
-                    <span>100%</span>
-                    <span>Hecho a mano</span>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Hecho a mano</span>
                 </div>
             </div>
-        </section>
+        </div>
         
-        <!-- Contenedor para la imagen derecha -->
-        <section>
-            <!-- Aquí iría la imagen de los jeans -->
-        </section>
+        <div class="hero-image"></div>
     </main>
 
-    <!-- PIE DE PÁGINA (FOOTER) -->
-    <footer>
-        <div>
-            <!-- Columna 1: Información de marca -->
-            <section>
-                <h2>Trazo & Piedra</h2>
-                <p>Moda artesanal de lujo. Denim pintado a mano y piezas bordadas, hechas en pequeñas series por nuestras artesanas.</p>
-            </section>
+    <!-- FOOTER (image_ac3e43.png) -->
+    <footer class="main-footer">
+        <!-- Columna 1: Branding -->
+        <div class="footer-brand">
+            <h2>Trazo & Piedra</h2>
+            <p>Moda artesanal de lujo. Denim pintado a mano y piezas bordadas, hechas en pequeñas series por nuestras artesanas.</p>
+        </div>
 
-            <!-- Columna 2: Navegación del Atelier -->
-            <section>
-                <h3>Atelier</h3>
-                <ul>
-                    <li><a href="#">Catálogo</a></li>
-                    <li><a href="#">Personalización</a></li>
-                    <li><a href="#">Cuidado de la prenda</a></li>
-                    <li><a href="#">Historia</a></li>
-                </ul>
-            </section>
+        <!-- Columna 2: Atelier -->
+        <div class="footer-nav-col">
+            <h3>Atelier</h3>
+            <ul>
+                <li><a href="#">Catálogo</a></li>
+                <li><a href="#">Personalización</a></li>
+                <li><a href="#">Cuidado de la prenda</a></li>
+                <li><a href="#">Historia</a></li>
+            </ul>
+        </div>
 
-            <!-- Columna 3: Información de contacto -->
-            <section>
-                <h3>Contacto</h3>
-                <ul>
-                    <li><a href="mailto:contactotrazoypiedra@gmail.com">contactotrazoypiedra@gmail.com</a></li>
+        <!-- Columna 3: Contacto -->
+        <div class="footer-nav-col">
+            <h3>Contacto</h3>
+            <li><a href="mailto:contactotrazoypiedra@gmail.com">contactotrazoypiedra@gmail.com</a></li>
                     <li>+57 311 000 0000</li>
                     <li>Barranquilla · Colombia</li>
                 </ul>
             </section>
         </div>
+       
 
-        <!-- Créditos y Derechos de autor -->
-        <div>
-            <p>© 2026 Trazo & Piedra · Hecho a mano</strong></p>
+        <!-- Nueva sección inferior con los créditos -->
+        <div class="footer-bottom">
+            <p><strong>© 2026 Trazo & Piedra · Hecho a mano</p>
         </div>
     </footer>
 
