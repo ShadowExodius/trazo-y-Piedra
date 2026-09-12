@@ -1,0 +1,406 @@
+
+/* --- RESET BÁSICO --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fcf4f0; /* Fondo rosado / crema pálido */
+    color: #3d2b24;            /* Color principal texto marrón oscuro */
+    line-height: 1.5;
+}
+
+
+/* NAVBAR / ENCABEZADO                                       */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 60px;
+    width: 100%;
+    background-color: #fcf4f0;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #7c6c65;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: color 0.3s;
+}
+
+.nav-links a.active, 
+.nav-links a:hover {
+    color: #b08d57; /* Dorado sutil para enlace activo y hover */
+}
+
+/* LOGO DE TEXTO */
+.logo {
+    font-family: 'Cormorant Garamond', serif;
+    text-align: center;
+    line-height: 1;
+}
+
+.logo h1 {
+    font-size: 28px;
+    font-weight: 400;
+    font-style: italic;
+    color: #3d2b24;
+}
+
+.logo p {
+    font-size: 16px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-top: -4px;
+}
+
+/* ========================================================= */
+/*  ESTILOS PARA LA IMAGEN DEL LOGO:                       */          
+/* ========================================================= */
+/*
+.logo-imagen {
+    max-width: 130px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+*/
+
+
+/* SECCIÓN DE CONTACTO (ESCRÍBENOS)                          */
+
+.contacto-seccion {
+    min-height: 80vh;
+    padding: 60px 8% 80px 8%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contacto-contenedor {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1100px;
+    gap: 70px;
+}
+
+/* --- COLUMNA IZQUIERDA: INFORMACIÓN --- */
+.contacto-info {
+    flex: 1;
+    padding-top: 15px;
+}
+
+.subtitulo {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #b08d57;
+    text-transform: uppercase;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.titulo-contacto {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 60px;
+    font-weight: 400;
+    color: #3d2b24;
+    line-height: 1.1;
+    margin-bottom: 25px;
+}
+
+.descripcion-contacto {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #7c6c65;
+    font-weight: 300;
+    margin-bottom: 40px;
+    max-width: 440px;
+}
+
+/* Bloques de datos (Atelier, Correo, Horario) */
+.info-bloques {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.info-item h3 {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #a4968e;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.info-item p {
+    font-size: 13px;
+    color: #3d2b24;
+}
+
+.info-item a {
+    color: #3d2b24;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.info-item a:hover {
+    color: #b08d57;
+}
+
+/* --- COLUMNA DERECHA: TARJETA DEL FORMULARIO --- */
+.contacto-formulario-caja {
+    flex: 1;
+    max-width: 460px;
+    background-color: #ffffff;
+    padding: 45px 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+/* Campos con línea inferior */
+.campo {
+    margin-bottom: 28px;
+    display: flex;
+    flex-direction: column;
+}
+
+.campo label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #a4968e;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.campo input,
+.campo textarea {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #ded5cf;
+    background-color: transparent;
+    padding: 8px 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    color: #3d2b24;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.campo textarea {
+    resize: vertical;
+    min-height: 70px;
+}
+
+/* Efecto al enfocar campo */
+.campo input:focus,
+.campo textarea:focus {
+    border-bottom-color: #3d2b24;
+}
+
+/* Estado de error en el campo */
+.campo input.input-error,
+.campo textarea.input-error {
+    border-bottom-color: #c0392b;
+}
+
+/* Mensaje de error debajo del campo */
+.error-texto {
+    display: none;
+    color: #c0392b;
+    font-size: 11px;
+    margin-top: 5px;
+    font-weight: 400;
+}
+
+.error-texto.activo {
+    display: block;
+}
+
+/* Botón de Enviar */
+.btn-enviar {
+    width: 100%;
+    background-color: #2b1f1a;
+    color: #fcf4f0;
+    border: none;
+    padding: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 8px;
+}
+
+.btn-enviar:hover {
+    background-color: #423028;
+}
+
+.btn-enviar:disabled {
+    background-color: #8c7f78;
+    cursor: not-allowed;
+}
+
+/* Mensaje de éxito al enviar */
+.mensaje-exito {
+    display: none;
+    margin-top: 20px;
+    padding: 12px 15px;
+    background-color: #eafaf1;
+    color: #27ae60;
+    font-size: 12px;
+    border: 1px solid #a9dfbf;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.mensaje-exito.activo {
+    display: block;
+}
+
+
+/* FOOTER / PIE DE PÁGINA                                    */
+
+.main-footer {
+    background-color: #1b3322; /* Verde bosque */
+    color: #e2d9d0;
+    padding: 70px 8% 30px 8%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.footer-brand {
+    flex: 1.5;
+    min-width: 260px;
+    max-width: 380px;
+}
+
+.footer-brand h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px;
+    font-weight: 400;
+    font-style: italic;
+    color: #c5a880; /* Título en dorado elegante */
+    margin-bottom: 18px;
+}
+
+.footer-brand p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #c9c1b8;
+    font-weight: 300;
+}
+
+/* Columnas de navegación del footer */
+.footer-nav-col {
+    flex: 1;
+    min-width: 180px;
+}
+
+.footer-nav-col h3 {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #c5a880;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+.footer-nav-col ul {
+    list-style: none;
+}
+
+.footer-nav-col ul li {
+    margin-bottom: 10px;
+}
+
+.footer-nav-col ul a,
+.footer-nav-col ul li {
+    color: #e2d9d0;
+    font-size: 13px;
+    font-weight: 300;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-nav-col ul a:hover {
+    color: #c5a880;
+}
+
+/* Barra inferior del footer (Copyright) */
+.footer-bottom {
+    width: 100%;
+    border-top: 1px solid rgba(226, 217, 208, 0.15);
+    padding-top: 25px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.footer-bottom p {
+    font-size: 12px;
+    color: #9fac9f;
+    letter-spacing: 1px;
+}
+
+
+/* DISEÑO RESPONSIVO (TABLETS Y CELULARES)                   */
+
+@media (max-width: 900px) {
+    header {
+        padding: 20px;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .contacto-seccion {
+        padding: 40px 5%;
+    }
+
+    .contacto-contenedor {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+    }
+
+    .contacto-info {
+        text-align: center;
+    }
+
+    .descripcion-contacto {
+        margin: 0 auto 30px auto;
+    }
+
+    .info-bloques {
+        align-items: center;
+    }
+
+    .contacto-formulario-caja {
+        width: 100%;
+        max-width: 100%;
+        padding: 30px 20px;
+    }
+
+    .main-footer {
+        flex-direction: column;
+        padding: 50px 5% 25px 5%;
+    }
+}
