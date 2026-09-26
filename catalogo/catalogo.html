@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Catálogo - Trazo & Piedra</title>
+  
+  <!-- Tipografías de Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Hoja de estilos del catálogo -->
+  <link rel="stylesheet" href="./stylecata.css">
+</head>
+<body>
+
+  <!-- NAVBAR PRINCIPAL -->
+  <header class="main-header">
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="catalogo.html" class="active">Catálogo</a></li>
+      <li><a href="#">Servicios</a></li>
+    </ul>
+    
+    <div class="logo">
+      <a href="index.html"><img src="imagenes/trazo-piedra-logo.png" alt="Trazo & Piedra Logo"></a>
+    </div>
+    
+    <ul class="nav-links">
+      <li><a href="../formulario/formulario.html">Contacto</a></li>
+      <li><a href="#">Admin</a></li>
+      <li><a href="#">Bolsa (0)</a></li>
+    </ul>
+  </header>
+
+  <!-- CONTENEDOR DEL CATÁLOGO -->
+  <div class="container">
+    <section class="catalog-hero">
+      <div class="header-tag">Atelier</div>
+      <h1 class="title">El catálogo</h1>
+      <p class="subtitle">Piezas únicas o personalizables. Cada artículo cuenta una historia.</p>
+    </section>
+
+    <!-- Botones de filtro -->
+    <nav class="filters">
+      <button class="filter-btn active">Todo</button>
+      <button class="filter-btn">Jeans</button>
+      <button class="filter-btn">Tops</button>
+      <button class="filter-btn">Chaquetas</button>
+      <button class="filter-btn">Bolsos</button>
+      <button class="filter-btn">Cuidado</button>
+    </nav>
+
+    <!-- Rejilla de Productos con extensión .jpg -->
+    <main class="catalog-grid">
+      
+      <!-- 1. Jean Vintage Japanese Geisha -->
+      <article class="product-card">
+        <div class="image-container">
+          <img src="imagenes/Jean vintage Japanese Geisha.jpg" alt="Jean vintage Japanese Geisha">
+          <span class="badge-custom">★ Custom</span>
+        </div>
+        <div class="product-info">
+          <span class="category-label">Jeans</span>
+          <div class="product-footer">
+            <span class="product-name">Jean vintage Japanese Geisha</span>
+            <span class="product-price">$ 120.000</span> 
+          </div>
+        </div>
+      </article>
+
+      <!-- 2. Camiseta Sol -->
+      <article class="product-card">
+        <div class="image-container">
+          <img src="imagenes/camisetasol.jpg" alt="Top Sol de Oro">
+        </div>
+        <div class="product-info">
+          <span class="category-label">Tops</span>
+          <div class="product-footer">
+            <span class="product-name">Top Sol de Oro</span>
+            <span class="product-price">$ 320.000</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3. Chaqueta Jean Spider-Man -->
+      <article class="product-card">
+        <div class="image-container">
+          <img src="imagenes/chaqueta jean intada.jpg" alt="Chaqueta Denim Spider-Man">
+          <span class="badge-custom">★ Custom</span>
+        </div>
+        <div class="product-info">
+          <span class="category-label">Chaquetas</span>
+          <div class="product-footer">
+            <span class="product-name">Chaqueta Denim Spider-Man</span>
+            <span class="product-price">$ 380.000</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4. Kit Cuidado -->
+      <article class="product-card">
+        <div class="image-container">
+          <img src="imagenes/kit cuidado.jpg" alt="Kit de Cuidado de Prendas Biogar">
+        </div>
+        <div class="product-info">
+          <span class="category-label">Cuidado</span>
+          <div class="product-footer">
+            <span class="product-name">Kit Cuidado Ecológico</span>
+            <span class="product-price">$ 85.000</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5. Bolso Pintado -->
+      <article class="product-card">
+        <div class="image-container">
+          <img src="imagenes/bolso pintado.jpg" alt="Bolso Pintado Naranjas">
+          <span class="badge-custom">★ Custom</span>
+        </div>
+        <div class="product-info">
+          <span class="category-label">Bolsos</span>
+          <div class="product-footer">
+            <span class="product-name">Tote Bag Naranjas en Flor</span>
+            <span class="product-price">$ 75.000</span>
+          </div>
+        </div>
+      </article>
+
+    </main>
+  </div>
+
+  <!-- FOOTER PRINCIPAL -->
+  <footer class="main-footer">
+    <div class="footer-brand">
+      <h2>Trazo & Piedra</h2>
+      <p>Moda artesanal de lujo. Denim pintado a mano y piezas bordadas, hechas en pequeñas series por nuestras artesanas.</p>
+    </div>
+
+    <div class="footer-nav-col">
+      <h3>Atelier</h3>
+      <ul>
+        <li><a href="catalogo.html">Catálogo</a></li>
+        <li><a href="#">Personalización</a></li>
+        <li><a href="#">Cuidado de la prenda</a></li>
+        <li><a href="#">Historia</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-nav-col">
+      <h3>Contacto</h3>
+      <ul>
+        <li><a href="mailto:contactotrazoypiedra@gmail.com">contactotrazoypiedra@gmail.com</a></li>
+        <li>+57 311 000 0000</li>
+        <li>Barranquilla · Colombia</li>
+      </ul>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 Trazo & Piedra · Hecho a mano</p>
+    </div>
+  </footer>
+
+</body>
+</html>
