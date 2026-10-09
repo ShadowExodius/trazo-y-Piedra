@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Trazo & Piedra</title>
+    
+    <!-- Tipografías de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Hoja de estilos -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  
+    <!-- NAVBAR / ENCABEZADO                        -->
+  
+    <header>
+        <ul class="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../catalogo/catalogo.html">Catálogo</a></li>
+            <li><a href="#">Servicios</a></li>
+        </ul>
+        
+        <div class="logo">
+            <a href="#"><img src="imagenes/trazo-piedra-logo.png" alt="Trazo & Piedra Logo"></a>
+        </div>
+        
+        <ul class="nav-links">
+            <li><a href="formulario.html" class="active">Contacto</a></li>
+            <li><a href="#">Admin</a></li>
+            <li><a href="#">Bolsa (0)</a></li>
+        </ul>
+    </header>
+
+  
+    <!-- SECCIÓN PRINCIPAL: CONTACTO (ESCRÍBENOS)   -->
+    
+    <main class="contacto-seccion">
+        <div class="contacto-contenedor">
+            
+            <!-- Columna Izquierda: Información de contacto -->
+            <div class="contacto-info">
+                <span class="subtitulo">CONVERSEMOS</span>
+                <h1 class="titulo-contacto">Escríbenos</h1>
+                
+                <p class="descripcion-contacto">
+                    Para encargos a medida, restauración o visitas al atelier.<br>
+                    Respondemos en menos de 24 horas — siempre desde la mano de una persona.
+                </p>
+                
+                <div class="info-bloques">
+                    <div class="info-item">
+                        <h3>ATELIER</h3>
+                        <p>Cra. 11 # 84-12, Bogotá, Colombia</p>
+                    </div>
+                    
+                    <div class="info-item">
+                        <h3>CORREO</h3>
+                        <p><a href="mailto:hola@trazoypiedra.com">hola@trazoypiedra.com</a></p>
+                    </div>
+                    
+                    <div class="info-item">
+                        <h3>HORARIO</h3>
+                        <p>Mar — Sáb · 10:00 — 18:00</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna Derecha: Tarjeta con Formulario -->
+            <div class="contacto-formulario-caja">
+                <form id="formulario-contacto" novalidate>
+                    
+                    <!-- Campo Nombre -->
+                    <div class="campo">
+                        <label for="nombre">NOMBRE</label>
+                        <input type="text" id="nombre" name="nombre" autocomplete="off">
+                        <span class="error-texto" id="error-nombre"></span>
+                    </div>
+
+                    <!-- Campo Correo -->
+                    <div class="campo">
+                        <label for="correo">CORREO ELECTRÓNICO</label>
+                        <input type="email" id="correo" name="correo" autocomplete="off">
+                        <span class="error-texto" id="error-correo"></span>
+                    </div>
+
+                    <!-- Campo Asunto -->
+                    <div class="campo">
+                        <label for="asunto">ASUNTO</label>
+                        <input type="text" id="asunto" name="asunto" autocomplete="off">
+                        <span class="error-texto" id="error-asunto"></span>
+                    </div>
+
+                    <!-- Campo Mensaje -->
+                    <div class="campo">
+                        <label for="mensaje">MENSAJE</label>
+                        <textarea id="mensaje" name="mensaje" rows="4"></textarea>
+                        <span class="error-texto" id="error-mensaje"></span>
+                    </div>
+
+                    <!-- Botón de envío -->
+                    <button type="submit" id="btn-enviar" class="btn-enviar">ENVIAR MENSAJE</button>
+
+                    <!-- Mensaje de éxito al enviar -->
+                    <div id="mensaje-exito" class="mensaje-exito">
+                        ¡Gracias por comunicarte! Tu mensaje ha sido enviado exitosamente. Te responderemos pronto.
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+  
+    <!-- FOOTER / PIE DE PÁGINA                     -->
+   
+    <footer class="main-footer">
+        
+        <!-- Columna 1: Branding -->
+        <div class="footer-brand">
+            <h2>Trazo & Piedra</h2>
+            <p>Moda artesanal de lujo. Denim pintado a mano y piezas bordadas, hechas en pequeñas series por nuestras artesanas.</p>
+        </div>
+
+        <!-- Columna 2: Atelier -->
+        <div class="footer-nav-col">
+            <h3>Atelier</h3>
+            <ul>
+                <li><a href="#">Catálogo</a></li>
+                <li><a href="#">Personalización</a></li>
+                <li><a href="#">Cuidado de la prenda</a></li>
+                <li><a href="#">Historia</a></li>
+            </ul>
+        </div>
+
+        <!-- Columna 3: Contacto -->
+        <div class="footer-nav-col">
+            <h3>Contacto</h3>
+            <ul>
+                <li><a href="mailto:contactotrazoypiedra@gmail.com">contactotrazoypiedra@gmail.com</a></li>
+                <li>+57 311 000 0000</li>
+                <li>Barranquilla · Colombia</li>
+            </ul>
+        </div>
+
+        <!-- Derechos de autor -->
+        <div class="footer-bottom">
+            <p>© 2026 Trazo & Piedra · Hecho a mano</p>
+        </div>
+
+    </footer>
+
+    <!-- Archivo de funcionalidad JavaScript -->
+    <script src="Js/script.js"></script>
+</body>
+</html>
