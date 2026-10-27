@@ -36,7 +36,8 @@
 
     <!-- SECCIÓN PRINCIPAL: PORTAL DEL ATELIER -->
     <main class="admin-seccion">
-        <div class="admin-caja">
+        <!-- 1. Tarjeta de inicio de sesión -->
+        <div class="admin-caja" id="caja-login">
 
             <div class="admin-encabezado">
                 <div class="icono-circulo">
@@ -63,13 +64,15 @@
 
                 <!-- Botón Ingresar -->
                 <button type="submit" class="btn-ingresar">INGRESAR</button>
-
-                <!-- Mensaje al ingresar -->
-                <div id="mensaje-exito" class="mensaje-estado">
-                    Acceso verificado. Bienvenido al Portal del Atelier.
-                </div>
             </form>
 
+        </div>
+
+        <!-- 2. Panel de mensajes de MongoDB (se muestra al ingresar) -->
+        <div class="panel-mensajes" id="panel-mensajes">
+            <h2 class="admin-titulo">Mensajes Recibidos (MongoDB)</h2>
+            <p class="admin-subtitulo">Consultas enviadas desde el formulario de contacto.</p>
+            <div id="lista-mensajes" class="lista-mensajes"></div>
         </div>
     </main>
 
