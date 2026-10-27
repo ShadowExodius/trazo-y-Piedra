@@ -73,41 +73,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // --- SI TODO ES CORRECTO ---
         if (formularioValido) {
-            // Cambiamos el estado del botón mientras simula el envío
-            btnEnviar.disabled = true;
-            btnEnviar.textContent = 'ENVIANDO...';
+            // Guardamos los datos en un objeto
+            const nuevoMensaje = {
+                nombre: inputNombre.value.trim(),
+                correo: inputCorreo.value.trim(),
+                asunto: inputAsunto.value.trim(),
+                mensaje: inputMensaje.value.trim()
+            };
 
-            // Simulamos el tiempo de respuesta del servidor (1 segundo)
-            setTimeout(function () {
-                
-                // Guardamos los datos en un objeto
-                const nuevoMensaje = {
-                    nombre: inputNombre.value.trim(),
-                    correo: inputCorreo.value.trim(),
-                    asunto: inputAsunto.value.trim(),
-                    mensaje: inputMensaje.value.trim(),
-                    fecha: new Date().toLocaleString()
-                };
+            // Enviamos los datos al servidor para guardarlos en MongoDB
+            fetch('http://localhost:3000/contacto', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(nuevoMensaje)
+            });
 
-                // Guardamos en LocalStorage para evidencia del proyecto
-                guardarEnLocalStorage(nuevoMensaje);
-
-                // Mostramos el mensaje de éxito
-                mensajeExito.classList.add('activo');
-
-                // Limpiamos los campos del formulario
-                formulario.reset();
-
-                // Restauramos el botón
-                btnEnviar.disabled = false;
-                btnEnviar.textContent = 'ENVIAR MENSAJE';
-
-                // Ocultamos el mensaje de éxito luego de 5 segundos
-                setTimeout(function () {
-                    mensajeExito.classList.remove('activo');
-                }, 5000);
-
-            }, 1000);
+            // Mostramos el mensaje de éxito y limpiamos el formulario
+            mensajeExito.classList.add('activo');
+            formulario.reset();
         }
     });
 
@@ -152,13 +135,5 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
-
-    // 6. Guardar mensaje en el almacenamiento local del navegador (LocalStorage)
-    function guardarEnLocalStorage(mensaje) {
-        let mensajesGuardados = JSON.parse(localStorage.getItem('mensajes_contacto')) || [];
-        mensajesGuardados.push(mensaje);
-        localStorage.setItem('mensajes_contacto', JSON.stringify(mensajesGuardados));
-        console.log('Mensaje registrado con éxito:', mensaje);
-    }
 
 });
