@@ -1,81 +1,71 @@
-import { useEffect, useRef, useState } from 'react'
-import FormField from '../components/FormField.jsx'
+import { useState } from 'react'
 
 const FORMATO_CORREO = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-const VACIO = { nombre: '', correo: '', asunto: '', mensaje: '' }
-
-function validar({ nombre, correo, asunto, mensaje }) {
-  const errores = {}
-  const n = nombre.trim()
-  const c = correo.trim()
-  const a = asunto.trim()
-  const m = mensaje.trim()
-
-  if (!n) errores.nombre = 'Por favor, ingresa tu nombre completo.'
-  else if (n.length < 3) errores.nombre = 'El nombre debe tener mínimo 3 caracteres.'
-
-  if (!c) errores.correo = 'Por favor, ingresa tu correo electrónico.'
-  else if (!FORMATO_CORREO.test(c)) errores.correo = 'Ingresa un formato de correo válido (ej: nombre@correo.com).'
-
-  if (!a) errores.asunto = 'Por favor, indica el asunto.'
-  else if (a.length < 3) errores.asunto = 'El asunto debe tener al menos 3 caracteres.'
-
-  if (!m) errores.mensaje = 'Por favor, escribe tu mensaje.'
-  else if (m.length < 10) errores.mensaje = 'El mensaje debe tener al menos 10 caracteres.'
-
-  return errores
-}
-
-// Evidencia del proyecto: guarda los mensajes en el navegador (igual que la versión HTML).
-function guardarEnLocalStorage(mensaje) {
-  try {
-    const guardados = JSON.parse(localStorage.getItem('mensajes_contacto')) || []
-    guardados.push(mensaje)
-    localStorage.setItem('mensajes_contacto', JSON.stringify(guardados))
-  } catch {
-    // Si el almacenamiento no está disponible, el formulario igual funciona.
-  }
-}
 
 export default function Contacto() {
-  const [valores, setValores] = useState(VACIO)
+  const [nombre, setNombre] = useState('')
+  const [correo, setCorreo] = useState('')
+  const [asunto, setAsunto] = useState('')
+  const [mensaje, setMensaje] = useState('')
+
   const [errores, setErrores] = useState({})
-  const [enviando, setEnviando] = useState(false)
   const [exito, setExito] = useState(false)
-  const timers = useRef([])
-
-  useEffect(() => () => timers.current.forEach(clearTimeout), [])
-
-  const cambiar = (campo, valor) => {
-    setValores((v) => ({ ...v, [campo]: valor }))
-    if (errores[campo]) setErrores((e) => ({ ...e, [campo]: undefined }))
-  }
 
   const enviar = (evento) => {
     evento.preventDefault()
     setExito(false)
 
-    const nuevosErrores = validar(valores)
+    const nuevosErrores = {}
+
+    if (nombre.trim() === '') {
+      nuevosErrores.nombre = 'Por favor, ingresa tu nombre completo.'
+    } else if (nombre.trim().length < 3) {
+      nuevosErrores.nombre = 'El nombre debe tener mínimo 3 caracteres.'
+    }
+
+    if (correo.trim() === '') {
+      nuevosErrores.correo = 'Por favor, ingresa tu correo electrónico.'
+    } else if (!FORMATO_CORREO.test(correo.trim())) {
+      nuevosErrores.correo = 'Ingresa un formato de correo válido (ej: nombre@correo.com).'
+    }
+
+    if (asunto.trim() === '') {
+      nuevosErrores.asunto = 'Por favor, indica el asunto.'
+    } else if (asunto.trim().length < 3) {
+      nuevosErrores.asunto = 'El asunto debe tener al menos 3 caracteres.'
+    }
+
+    if (mensaje.trim() === '') {
+      nuevosErrores.mensaje = 'Por favor, escribe tu mensaje.'
+    } else if (mensaje.trim().length < 10) {
+      nuevosErrores.mensaje = 'El mensaje debe tener al menos 10 caracteres.'
+    }
+
     setErrores(nuevosErrores)
+
+    // Si hay errores, detenemos el envío
     if (Object.keys(nuevosErrores).length > 0) return
 
-    setEnviando(true)
-    // Simula el tiempo de respuesta del servidor (1 segundo)
-    timers.current.push(
-      setTimeout(() => {
-        guardarEnLocalStorage({
-          nombre: valores.nombre.trim(),
-          correo: valores.correo.trim(),
-          asunto: valores.asunto.trim(),
-          mensaje: valores.mensaje.trim(),
-          fecha: new Date().toLocaleString(),
-        })
-        setValores(VACIO)
-        setEnviando(false)
-        setExito(true)
-        timers.current.push(setTimeout(() => setExito(false), 5000))
-      }, 1000),
-    )
+    // Si todo es válido, enviamos a MongoDB
+    const nuevoMensaje = {
+      nombre: nombre.trim(),
+      correo: correo.trim(),
+      asunto: asunto.trim(),
+      mensaje: mensaje.trim(),
+    }
+
+    fetch('http://localhost:3000/contacto', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(nuevoMensaje),
+    })
+
+    // Limpiamos los campos y mostramos el mensaje de éxito
+    setNombre('')
+    setCorreo('')
+    setAsunto('')
+    setMensaje('')
+    setExito(true)
   }
 
   return (
@@ -109,16 +99,62 @@ export default function Contacto() {
 
         <div className="contacto-formulario-caja">
           <form onSubmit={enviar} noValidate>
-            <FormField id="nombre" label="NOMBRE" value={valores.nombre} error={errores.nombre} onChange={cambiar} />
-            <FormField id="correo" label="CORREO ELECTRÓNICO" tipo="email" value={valores.correo} error={errores.correo} onChange={cambiar} />
-            <FormField id="asunto" label="ASUNTO" value={valores.asunto} error={errores.asunto} onChange={cambiar} />
-            <FormField id="mensaje" label="MENSAJE" tipo="textarea" rows={4} value={valores.mensaje} error={errores.mensaje} onChange={cambiar} />
+            {/* Campo Nombre */}
+            <div className="campo">
+              <label htmlFor="nombre">NOMBRE</label>
+              <input
+                type="text"
+                id="nombre"
+                value={nombre}
+                onChange={(e) => setNombre(e.target.value)}
+                autoComplete="off"
+              />
+              {errores.nombre && <span className="error-texto activo">{errores.nombre}</span>}
+            </div>
 
-            <button type="submit" className="btn-enviar" disabled={enviando}>
-              {enviando ? 'ENVIANDO...' : 'ENVIAR MENSAJE'}
+            {/* Campo Correo */}
+            <div className="campo">
+              <label htmlFor="correo">CORREO ELECTRÓNICO</label>
+              <input
+                type="email"
+                id="correo"
+                value={correo}
+                onChange={(e) => setCorreo(e.target.value)}
+                autoComplete="off"
+              />
+              {errores.correo && <span className="error-texto activo">{errores.correo}</span>}
+            </div>
+
+            {/* Campo Asunto */}
+            <div className="campo">
+              <label htmlFor="asunto">ASUNTO</label>
+              <input
+                type="text"
+                id="asunto"
+                value={asunto}
+                onChange={(e) => setAsunto(e.target.value)}
+                autoComplete="off"
+              />
+              {errores.asunto && <span className="error-texto activo">{errores.asunto}</span>}
+            </div>
+
+            {/* Campo Mensaje */}
+            <div className="campo">
+              <label htmlFor="mensaje">MENSAJE</label>
+              <textarea
+                id="mensaje"
+                rows="4"
+                value={mensaje}
+                onChange={(e) => setMensaje(e.target.value)}
+              />
+              {errores.mensaje && <span className="error-texto activo">{errores.mensaje}</span>}
+            </div>
+
+            <button type="submit" className="btn-enviar">
+              ENVIAR MENSAJE
             </button>
 
-            <div className={`mensaje-exito${exito ? ' activo' : ''}`} role="status">
+            <div className={`mensaje-exito${exito ? ' activo' : ''}`}>
               ¡Gracias por comunicarte! Tu mensaje ha sido enviado exitosamente. Te responderemos pronto.
             </div>
           </form>

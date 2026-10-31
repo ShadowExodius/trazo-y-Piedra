@@ -9,7 +9,7 @@ export default function Header({ ruta }) {
       <ul className="nav-links">
         <li><a href="#/" className={activo('/')}>Home</a></li>
         <li><a href="#/catalogo" className={activo('/catalogo')}>Catálogo</a></li>
-        <li><a href="#/">Servicios</a></li>
+        <li><a href="#/servicios" className={activo('/servicios')}>Servicios</a></li>
       </ul>
 
       <div className="logo">
@@ -18,7 +18,7 @@ export default function Header({ ruta }) {
 
       <ul className="nav-links">
         <li><a href="#/contacto" className={activo('/contacto')}>Contacto</a></li>
-        <li><a href="#/">Admin</a></li>
+        <li><a href="#/admin" className={activo('/admin')}>Admin</a></li>
         <li>
           <button type="button" className="nav-bolsa" onClick={abrirBolsa}>
             Bolsa ({cantidadTotal})

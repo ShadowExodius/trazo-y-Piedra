@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 // Router mínimo por hash (#/catalogo). Sin dependencias y funciona en cualquier hosting estático.
-const RUTAS = ['/', '/catalogo', '/contacto']
+const RUTAS = ['/', '/catalogo', '/servicios', '/contacto', '/admin']
 
 function leerRuta() {
   const ruta = window.location.hash.replace(/^#/, '') || '/'

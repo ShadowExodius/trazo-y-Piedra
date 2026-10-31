@@ -14,7 +14,7 @@ export default function Footer() {
           <h3>Atelier</h3>
           <ul>
             <li><a href="#/catalogo">Catálogo</a></li>
-            <li><a href="#/contacto">Personalización</a></li>
+            <li><a href="#/servicios">Personalización</a></li>
             <li><a href="#/">Cuidado de la prenda</a></li>
             <li><a href="#/">Historia</a></li>
           </ul>

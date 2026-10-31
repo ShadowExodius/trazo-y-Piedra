@@ -3,14 +3,18 @@ import Footer from './components/Footer.jsx'
 import Bolsa from './components/Bolsa.jsx'
 import Home from './pages/Home.jsx'
 import Catalogo from './pages/Catalogo.jsx'
+import Servicios from './pages/Servicios.jsx'
 import Contacto from './pages/Contacto.jsx'
+import Admin from './pages/Admin.jsx'
 import { useHashRoute } from './hooks/useHashRoute.js'
 import BolsaProvider from './components/BolsaProvider.jsx'
 
 const PAGINAS = {
   '/': Home,
   '/catalogo': Catalogo,
+  '/servicios': Servicios,
   '/contacto': Contacto,
+  '/admin': Admin,
 }
 
 export default function App() {

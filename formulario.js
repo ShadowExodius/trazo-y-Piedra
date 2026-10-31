@@ -1,10 +1,10 @@
-const express = require('express');
-const mongoose = require('mongoose');
+import express from 'express';
+import mongoose from 'mongoose';
+
 const app = express();
 app.use(express.json());
-app.use(express.static(__dirname));
 
-// Permitir que el formulario HTML envíe datos al servidor
+// Permitir que el formulario envíe datos al servidor
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Content-Type');

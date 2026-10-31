@@ -16,7 +16,7 @@ export default function Home() {
 
           <div className="cta-container">
             <a href="#/catalogo" className="btn-primary">Ver el catálogo &rarr;</a>
-            <a href="#/contacto" className="btn-secondary">Personaliza tu pieza</a>
+            <a href="#/servicios" className="btn-secondary">Personaliza tu pieza</a>
           </div>
 
           <div className="stats">

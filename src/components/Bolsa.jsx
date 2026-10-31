@@ -1,12 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import { formatoPrecio } from '../data/productos.js'
 import { useBolsa } from '../hooks/useBolsa.js'
-
-const IconoCerrar = ({ size = 22 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" aria-hidden="true">
-    <path d="M5 5l14 14M19 5L5 19" />
-  </svg>
-)
 
 export default function Bolsa() {
   const {
@@ -16,20 +10,6 @@ export default function Bolsa() {
 
   const [texto, setTexto] = useState('')
   const [respuesta, setRespuesta] = useState(null)
-  const botonCerrar = useRef(null)
-
-  // Escape cierra, el scroll de la página se bloquea y el foco pasa al panel
-  useEffect(() => {
-    if (!abierta) return
-    const alTeclear = (e) => e.key === 'Escape' && cerrarBolsa()
-    window.addEventListener('keydown', alTeclear)
-    document.body.style.overflow = 'hidden'
-    botonCerrar.current?.focus()
-    return () => {
-      window.removeEventListener('keydown', alTeclear)
-      document.body.style.overflow = ''
-    }
-  }, [abierta, cerrarBolsa])
 
   const aplicar = () => {
     if (!texto.trim()) return
@@ -43,7 +23,6 @@ export default function Bolsa() {
     setRespuesta(null)
   }
 
-  // Aún no hay checkout: lleva al formulario de contacto, donde se coordinan envío y personalización
   const finalizar = () => {
     cerrarBolsa()
     window.location.hash = '#/contacto'
@@ -53,18 +32,11 @@ export default function Bolsa() {
     <>
       <div className={`bolsa-overlay${abierta ? ' abierto' : ''}`} onClick={cerrarBolsa} />
 
-      <aside
-        className={`bolsa-panel${abierta ? ' abierto' : ''}`}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Tu bolsa"
-        aria-hidden={!abierta}
-        inert={!abierta}
-      >
+      <aside className={`bolsa-panel${abierta ? ' abierto' : ''}`}>
         <header className="bolsa-header">
           <h2>Tu bolsa</h2>
-          <button ref={botonCerrar} type="button" className="bolsa-icon-btn" onClick={cerrarBolsa} aria-label="Cerrar bolsa">
-            <IconoCerrar />
+          <button type="button" className="bolsa-icon-btn" onClick={cerrarBolsa}>
+            ✕
           </button>
         </header>
 
@@ -85,15 +57,15 @@ export default function Bolsa() {
                     <h3 className="bolsa-item-nombre">{item.nombre}</h3>
                     <p className="bolsa-item-precio">{formatoPrecio(item.precio)}</p>
                     <div className="bolsa-cantidad">
-                      <button type="button" onClick={() => cambiarCantidad(item.id, item.cantidad - 1)} disabled={item.cantidad <= 1} aria-label="Disminuir cantidad">−</button>
-                      <span aria-live="polite">{item.cantidad}</span>
-                      <button type="button" onClick={() => cambiarCantidad(item.id, item.cantidad + 1)} aria-label="Aumentar cantidad">+</button>
+                      <button type="button" onClick={() => cambiarCantidad(item.id, item.cantidad - 1)} disabled={item.cantidad <= 1}>−</button>
+                      <span>{item.cantidad}</span>
+                      <button type="button" onClick={() => cambiarCantidad(item.id, item.cantidad + 1)}>+</button>
                     </div>
                   </div>
 
                   <div className="bolsa-item-lateral">
-                    <button type="button" className="bolsa-icon-btn" onClick={() => eliminar(item.id)} aria-label={`Quitar ${item.nombre}`}>
-                      <IconoCerrar size={14} />
+                    <button type="button" className="bolsa-icon-btn" onClick={() => eliminar(item.id)}>
+                      ✕
                     </button>
                     <span className="bolsa-item-total">{formatoPrecio(item.precio * item.cantidad)}</span>
                   </div>
@@ -108,13 +80,12 @@ export default function Bolsa() {
                   id="codigo-descuento"
                   value={texto}
                   onChange={(e) => setTexto(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && aplicar()}
                   placeholder="Ej. TRAZO10"
                 />
                 <button type="button" className="bolsa-btn-aplicar" onClick={aplicar}>Aplicar</button>
               </div>
               {respuesta && (
-                <p className={`bolsa-mensaje${respuesta.ok ? '' : ' error'}`} role="status">{respuesta.mensaje}</p>
+                <p className={`bolsa-mensaje${respuesta.ok ? '' : ' error'}`}>{respuesta.mensaje}</p>
               )}
 
               <div className="bolsa-fila">

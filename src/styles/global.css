@@ -149,11 +149,9 @@ body {
 
 .hero-image { flex: 1; display: flex; justify-content: center; align-items: center; padding: 15px 20px; }
 .hero-image img {
-  max-width: 580px;
+  max-width: 460px;
   width: 100%;
   height: auto;
-  max-height: 85vh;
-  object-fit: cover;
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-warm);
   display: block;
@@ -384,6 +382,97 @@ body {
 }
 .mensaje-exito.activo { display: block; }
 
+/* ================= SERVICIOS ================= */
+.servicios-contenedor { max-width: 1100px; width: 100%; margin: 0 auto; padding: 60px 20px 90px; }
+.servicios-encabezado { text-align: center; margin-bottom: 50px; }
+.servicios-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
+
+.servicio-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.servicio-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-warm); }
+
+.icono-circulo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #f6e6e2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+}
+.icono-circulo.icono-centrado { margin: 0 auto 20px auto; }
+.icono-circulo img { width: 20px; height: 20px; }
+
+.servicio-titulo { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; color: var(--text-primary); margin-bottom: 12px; }
+.servicio-descripcion { font-size: 14px; color: var(--text-secondary); font-weight: 300; line-height: 1.6; margin-bottom: 25px; }
+
+.btn-agendar {
+  text-decoration: none;
+  color: var(--text-gold);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-top: auto;
+  transition: color 0.3s;
+}
+.btn-agendar:hover { color: var(--text-primary); }
+
+/* ================= ADMIN ================= */
+.admin-seccion { min-height: calc(100vh - 95px); padding: 60px 20px 80px; display: flex; justify-content: center; align-items: center; }
+
+.admin-caja {
+  width: 100%;
+  max-width: 440px;
+  background-color: var(--bg-card);
+  padding: 50px 45px;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-warm);
+}
+
+.admin-encabezado { text-align: center; margin-bottom: 35px; }
+.admin-titulo { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 400; color: var(--text-primary); margin-bottom: 8px; }
+.admin-subtitulo { font-size: 13px; color: var(--text-secondary); font-weight: 300; }
+
+.btn-ingresar {
+  width: 100%;
+  background-color: var(--bg-btn-primary);
+  color: var(--bg-body);
+  border: none;
+  padding: 15px 35px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 5px;
+}
+.btn-ingresar:hover { background-color: var(--bg-btn-hover); }
+
+.panel-mensajes { width: 100%; max-width: 850px; }
+.lista-mensajes { margin-top: 25px; display: flex; flex-direction: column; gap: 15px; }
+
+.item-mensaje {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 20px 25px;
+}
+.item-mensaje h3 { font-family: var(--font-serif); font-size: 1.4rem; color: var(--text-primary); margin-bottom: 4px; }
+.item-mensaje span { font-size: 12px; color: var(--text-gold); display: block; margin-bottom: 10px; }
+.item-mensaje p { font-size: 14px; color: var(--text-secondary); }
+
 /* ================= FOOTER ================= */
 .main-footer {
   width: 100%;
@@ -418,6 +507,8 @@ body {
   .hero-title { font-size: 3.4rem; }
   .categories-grid { grid-template-columns: repeat(3, 1fr); gap: 25px 15px; }
   .catalog-grid { grid-template-columns: repeat(2, 1fr); }
+  .servicios-grid { grid-template-columns: 1fr; }
+  .admin-caja { padding: 35px 25px; }
   .contacto-contenedor { flex-direction: column; gap: 40px; }
   .contacto-formulario-caja { max-width: 100%; width: 100%; }
   .main-footer { padding: 50px 5% 25px; }
