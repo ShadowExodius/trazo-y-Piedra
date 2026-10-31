@@ -84,6 +84,14 @@ export default function Admin() {
                 <h3>{item.asunto}</h3>
                 <span>{item.nombre} · {item.correo}</span>
                 <p>{item.mensaje}</p>
+
+                {item.bolsa && item.bolsa.length > 0 && (
+                  <p>
+                    <strong>Pedido en bolsa:</strong>{' '}
+                    {item.bolsa.map((p) => `${p.nombre} (x${p.cantidad})`).join(', ')} —{' '}
+                    <strong>Total: $ {item.total}</strong>
+                  </p>
+                )}
               </div>
             ))}
           </div>

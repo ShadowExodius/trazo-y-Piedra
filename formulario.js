@@ -24,7 +24,9 @@ const contactoSchema = new mongoose.Schema({
     nombre: String,
     correo: String,
     asunto: String,
-    mensaje: String
+    mensaje: String,
+    bolsa: Array,
+    total: Number
 });
 
 const Contacto = mongoose.model('Contacto', contactoSchema);

@@ -1,8 +1,11 @@
 import { useState } from 'react'
+import { useBolsa } from '../hooks/useBolsa.js'
 
 const FORMATO_CORREO = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export default function Contacto() {
+  const { items, total, vaciar } = useBolsa()
+
   const [nombre, setNombre] = useState('')
   const [correo, setCorreo] = useState('')
   const [asunto, setAsunto] = useState('')
@@ -46,12 +49,14 @@ export default function Contacto() {
     // Si hay errores, detenemos el envío
     if (Object.keys(nuevosErrores).length > 0) return
 
-    // Si todo es válido, enviamos a MongoDB
+    // Si todo es válido, enviamos a MongoDB (incluyendo la bolsa si tiene productos)
     const nuevoMensaje = {
       nombre: nombre.trim(),
       correo: correo.trim(),
       asunto: asunto.trim(),
       mensaje: mensaje.trim(),
+      bolsa: items,
+      total: total,
     }
 
     fetch('http://localhost:3000/contacto', {
@@ -60,11 +65,12 @@ export default function Contacto() {
       body: JSON.stringify(nuevoMensaje),
     })
 
-    // Limpiamos los campos y mostramos el mensaje de éxito
+    // Limpiamos los campos, vaciamos la bolsa y mostramos el mensaje de éxito
     setNombre('')
     setCorreo('')
     setAsunto('')
     setMensaje('')
+    vaciar()
     setExito(true)
   }
 
