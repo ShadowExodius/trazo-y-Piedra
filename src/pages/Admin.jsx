@@ -25,13 +25,23 @@ export default function Admin() {
       valido = false
     }
 
-    if (valido) {
-      setAutenticado(true)
+    if (!valido) return
 
-      fetch('http://localhost:3000/contacto')
-        .then((respuesta) => respuesta.json())
-        .then((datos) => setMensajes(datos))
+    // Validar que sea el usuario y contraseña de Dafne o de Angel
+    const correoLimpio = correo.trim().toLowerCase()
+    const esDafne = correoLimpio === 'dafne@trazoypiedra.com' && password === 'dafne1234'
+    const esAngel = correoLimpio === 'angel@trazoypiedra.com' && password === 'angel1234'
+
+    if (!esDafne && !esAngel) {
+      setErrorPassword('Correo o contraseña incorrectos.')
+      return
     }
+
+    setAutenticado(true)
+
+    fetch('http://localhost:3000/contacto')
+      .then((respuesta) => respuesta.json())
+      .then((datos) => setMensajes(datos))
   }
 
   return (
