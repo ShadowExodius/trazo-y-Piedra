@@ -13,10 +13,13 @@ export default function Contacto() {
 
   const [errores, setErrores] = useState({})
   const [exito, setExito] = useState(false)
+  const [cargando, setCargando] = useState(false)
+  const [errorEnvio, setErrorEnvio] = useState('')
 
   const enviar = (evento) => {
     evento.preventDefault()
     setExito(false)
+    setErrorEnvio('')
 
     const nuevosErrores = {}
 
@@ -59,19 +62,29 @@ export default function Contacto() {
       total: total,
     }
 
+    setCargando(true)
+
     fetch('http://localhost:3000/contacto', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(nuevoMensaje),
     })
-
-    // Limpiamos los campos, vaciamos la bolsa y mostramos el mensaje de éxito
-    setNombre('')
-    setCorreo('')
-    setAsunto('')
-    setMensaje('')
-    vaciar()
-    setExito(true)
+      .then((res) => {
+        if (!res.ok) throw new Error('Error al guardar')
+        // Limpiamos los campos, vaciamos la bolsa y mostramos el mensaje de éxito
+        setNombre('')
+        setCorreo('')
+        setAsunto('')
+        setMensaje('')
+        vaciar()
+        setExito(true)
+      })
+      .catch(() => {
+        setErrorEnvio('No se pudo conectar con el servidor. Verifica que el backend esté activo.')
+      })
+      .finally(() => {
+        setCargando(false)
+      })
   }
 
   return (
@@ -156,9 +169,11 @@ export default function Contacto() {
               {errores.mensaje && <span className="error-texto activo">{errores.mensaje}</span>}
             </div>
 
-            <button type="submit" className="btn-enviar">
-              ENVIAR MENSAJE
+            <button type="submit" className="btn-enviar" disabled={cargando}>
+              {cargando ? 'ENVIANDO...' : 'ENVIAR MENSAJE'}
             </button>
+
+            {errorEnvio && <span className="error-texto activo">{errorEnvio}</span>}
 
             <div className={`mensaje-exito${exito ? ' activo' : ''}`}>
               ¡Gracias por comunicarte! Tu mensaje ha sido enviado exitosamente. Te responderemos pronto.

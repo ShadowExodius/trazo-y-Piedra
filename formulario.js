@@ -39,6 +39,7 @@ app.post('/contacto', async (req, res) => {
         res.send('Guardado');
     } catch (err) {
         console.log('No se guardó:', err.message);
+        res.status(500).send('Error al guardar');
     }
 });
 

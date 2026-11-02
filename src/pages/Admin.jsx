@@ -7,6 +7,8 @@ export default function Admin() {
   const [errorPassword, setErrorPassword] = useState('')
   const [autenticado, setAutenticado] = useState(false)
   const [mensajes, setMensajes] = useState([])
+  const [cargando, setCargando] = useState(false)
+  const [errorCarga, setErrorCarga] = useState('')
 
   const ingresar = (evento) => {
     evento.preventDefault()
@@ -38,10 +40,21 @@ export default function Admin() {
     }
 
     setAutenticado(true)
+    setCargando(true)
+    setErrorCarga('')
 
     fetch('http://localhost:3000/contacto')
-      .then((respuesta) => respuesta.json())
+      .then((respuesta) => {
+        if (!respuesta.ok) throw new Error('Error al consultar')
+        return respuesta.json()
+      })
       .then((datos) => setMensajes(datos))
+      .catch(() => {
+        setErrorCarga('No se pudieron cargar los mensajes. Verifica que el servidor esté encendido.')
+      })
+      .finally(() => {
+        setCargando(false)
+      })
   }
 
   return (
@@ -88,7 +101,13 @@ export default function Admin() {
           <h2 className="admin-titulo">Mensajes Recibidos (MongoDB)</h2>
           <p className="admin-subtitulo">Consultas enviadas desde el formulario de contacto.</p>
 
+          {cargando && <p className="admin-subtitulo">Cargando mensajes...</p>}
+          {errorCarga && <span className="error-texto activo">{errorCarga}</span>}
+
           <div className="lista-mensajes">
+            {!cargando && !errorCarga && mensajes.length === 0 && (
+              <p className="admin-subtitulo">Aún no hay mensajes registrados.</p>
+            )}
             {mensajes.map((item, index) => (
               <div className="item-mensaje" key={item._id || index}>
                 <h3>{item.asunto}</h3>
