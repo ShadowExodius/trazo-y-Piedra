@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "backend": "node backend/formulario.js",
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview"

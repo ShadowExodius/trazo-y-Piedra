@@ -51,7 +51,9 @@ app.get('/contacto', async (req, res) => {
 
 // 4. Contexto e instrucciones de marca para el asistente IA de Trazo & Piedra
 if (typeof process.loadEnvFile === 'function') {
-    try { process.loadEnvFile('.env'); } catch {}
+    try { process.loadEnvFile('.env'); } catch {
+        try { process.loadEnvFile('../.env'); } catch {}
+    }
 }
 const API_KEY = process.env.GEMINI_API_KEY || "";
 

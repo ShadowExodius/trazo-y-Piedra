@@ -6,11 +6,15 @@ Versión en React del sitio: Home, Catálogo (con filtros) y Contacto (con valid
 
 ```bash
 npm install
-npm run dev      # desarrollo
+npm run dev      # frontend en desarrollo
+npm run backend  # servidor backend (puerto 3000)
 npm run build    # producción (carpeta dist/)
 ```
 
 ## Estructura
+
+- `src/` Frontend en React (páginas, componentes, hooks, datos y estilos)
+- `backend/` Servidor Express, conexión a MongoDB y ruta de IA (`backend/formulario.js` y `backend/usuario.js`)
 
 - `src/pages/` Home, Catalogo, Contacto
 - `src/components/` Header, Footer, ProductCard, FormField, Bolsa (panel lateral del carrito)

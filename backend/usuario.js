@@ -1,5 +1,5 @@
+import mongoose from 'mongoose';
 
-const mongoose = require('mongoose');
 const usuarioEsquema = new mongoose.Schema(
     {
         nombre: {
@@ -28,7 +28,7 @@ const usuarioEsquema = new mongoose.Schema(
             default: 'usuario',
             required: true
         },
-               puntos: {
+        puntos: {
             type: Number,
             min: [0, 'Los puntos no pueden ser negativos'],
             default: 0
@@ -42,5 +42,6 @@ const usuarioEsquema = new mongoose.Schema(
         timestamps: true
     }
 );
+
 const Usuario = mongoose.model('Usuario', usuarioEsquema);
-module.exports = Usuario;
+export default Usuario;
