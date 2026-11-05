@@ -2,6 +2,7 @@ import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
 import Bolsa from './components/Bolsa.jsx'
 import Chatbot from './components/Chatbot.jsx'
+import AccessibilityWidget from './components/AccessibilityWidget.jsx'
 import Home from './pages/Home.jsx'
 import Catalogo from './pages/Catalogo.jsx'
 import Servicios from './pages/Servicios.jsx'
@@ -29,6 +30,7 @@ export default function App() {
       <Footer />
       <Bolsa />
       <Chatbot />
+      <AccessibilityWidget />
     </BolsaProvider>
   )
 }
