@@ -798,22 +798,21 @@ label.bolsa-etiqueta { margin-bottom: 12px; }
 
 .chatbot-sugerencias {
   display: flex;
+  flex-wrap: wrap;
   gap: 6px;
-  overflow-x: auto;
-  padding: 8px 14px;
+  padding: 10px 14px;
   background-color: var(--bg-body);
   border-top: 1px solid var(--border-color);
 }
 
 .chatbot-chip {
-  flex-shrink: 0;
   background-color: var(--bg-card);
   color: var(--text-secondary);
   border: 1px solid var(--border-color);
   border-radius: 999px;
-  padding: 6px 12px;
+  padding: 5px 10px;
   font-family: var(--font-sans);
-  font-size: 10.5px;
+  font-size: 10px;
   cursor: pointer;
   transition: border-color 0.2s, color 0.2s;
 }

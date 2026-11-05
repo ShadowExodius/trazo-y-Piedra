@@ -36,7 +36,7 @@ export default function Home() {
         </div>
 
         <div className="hero-image">
-          <img src="/imagenes/imagen1.jpg" alt="Trazo & Piedra - Look 03 Jardín de Rosa" />
+          <img src="imagenes/imagen1.jpg" alt="Trazo & Piedra - Look 03 Jardín de Rosa" />
         </div>
       </section>
 

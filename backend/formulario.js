@@ -82,10 +82,31 @@ Información de contacto y beneficios:
 
 // Respuesta de respaldo basada en las reglas del negocio si la red falla
 export function respuestaLocalAtelier(pregunta = '') {
-    const texto = pregunta.toLowerCase();
+    const texto = pregunta.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
-    if (texto.includes('precio') || texto.includes('catalogo') || texto.includes('catálogo') || texto.includes('prenda') || texto.includes('producto') || texto.includes('tienen')) {
-        return 'En nuestro catálogo contamos con el Jean vintage Japanese Geisha ($ 120.000), Top Sol de Oro ($ 320.000), Chaqueta Denim Spider-Man ($ 380.000), Kit Cuidado Ecológico ($ 85.000) y el Tote Bag Naranjas en Flor ($ 75.000). Además, puedes usar el código TRAZO10 en tu bolsa para un 10% de descuento.';
+    if (/^(hola|buenas|buenos dias|buenas tardes|buenas noches|hey|saludos|quien eres)/.test(texto)) {
+        return '¡Hola! Soy Aurora, estilista de Trazo & Piedra. Estoy aquí para ayudarte a elegir una pieza pintada o bordada a mano, recomendarte un regalo o contarte sobre nuestros servicios de taller. ¿Qué estás buscando hoy?';
+    }
+    if (texto.includes('gracias') || texto.includes('adios') || texto.includes('chao') || texto.includes('perfecto') || texto.includes('genial')) {
+        return 'Con todo el gusto. Recuerda que en Trazo & Piedra cada pieza nace para una sola persona. Si deseas encargar o personalizar la tuya, te esperamos en la sección Contacto o con el código TRAZO10 en tu bolsa.';
+    }
+    if (texto.includes('chaqueta') || texto.includes('spider')) {
+        return 'Nuestra Chaqueta Denim Spider-Man tiene un valor de $ 380.000 COP. Es una pieza intervenida a mano y 100% personalizable; podemos adaptarle detalles o crear un motivo exclusivo para ti.';
+    }
+    if (texto.includes('jean') || texto.includes('geisha') || texto.includes('pantalon')) {
+        return 'El Jean vintage Japanese Geisha cuesta $ 120.000 COP. Es un denim intervenido a mano con inspiración japonesa y admite personalización en el taller.';
+    }
+    if (texto.includes('top') || texto.includes('sol de oro') || texto.includes('blusa') || texto.includes('camiseta')) {
+        return 'El Top Sol de Oro tiene un precio de $ 320.000 COP. Lleva bordado artesanal con hilo dorado, mostacilla y cristal hecho por nuestras artesanas.';
+    }
+    if (texto.includes('bolso') || texto.includes('tote') || texto.includes('naranja')) {
+        return 'El Tote Bag Naranjas en Flor cuesta $ 75.000 COP. Es pintado a mano, ligero, resistente y personalizable; una opción encantadora para uso diario o para regalar.';
+    }
+    if (texto.includes('recomienda') || texto.includes('regalo') || texto.includes('ocasion') || texto.includes('estilo') || texto.includes('look') || texto.includes('comprar')) {
+        return 'Si buscas un detalle accesible y único, te sugiero el Tote Bag Naranjas en Flor ($ 75.000) o el Jean Japanese Geisha ($ 120.000). Si prefieres una pieza protagonista de alta costura artesanal, el Top Sol de Oro ($ 320.000) o la Chaqueta Denim ($ 380.000) son inolvidables.';
+    }
+    if (texto.includes('talla') || texto.includes('envio') || texto.includes('domicilio') || texto.includes('demora') || texto.includes('entrega') || texto.includes('pago')) {
+        return 'Como trabajamos piezas hechas a mano y series 1/1, adaptamos las tallas y siluetas a tu medida. Realizamos envíos a toda Colombia desde Bogotá y calculamos el envío y la personalización al finalizar tu pedido en Contacto.';
     }
     if (texto.includes('servicio') || texto.includes('personaliza') || texto.includes('pint') || texto.includes('bordad') || texto.includes('restaura') || texto.includes('medida')) {
         return 'En nuestro Atelier ofrecemos cuatro oficios artesanales: Pintura a mano sobre denim, Bordado en oro con mostacilla y cristal, Modificación a medida y Restauración de prendas heredadas. Puedes agendar tu consulta desde la sección Contacto.';
@@ -93,13 +114,16 @@ export function respuestaLocalAtelier(pregunta = '') {
     if (texto.includes('cuidado') || texto.includes('lavar') || texto.includes('kit') || texto.includes('conservar')) {
         return 'Para conservar el trazo y el bordado de tus piezas recomendamos lavarlas a mano con agua fría y sin frotar la pintura. Nuestro Kit Cuidado Ecológico ($ 85.000) está formulado especialmente para proteger estas prendas.';
     }
-    if (texto.includes('descuento') || texto.includes('codigo') || texto.includes('código') || texto.includes('promo')) {
+    if (texto.includes('descuento') || texto.includes('codigo') || texto.includes('promo')) {
         return 'Puedes aplicar el código TRAZO10 en tu bolsa de compras para obtener un 10% de descuento en toda tu orden.';
     }
-    if (texto.includes('ubicacion') || texto.includes('ubicación') || texto.includes('donde') || texto.includes('dónde') || texto.includes('horario') || texto.includes('bogota') || texto.includes('bogotá') || texto.includes('contacto')) {
-        return 'Nuestro Atelier está ubicado en la Cra. 11 # 84-12 en Bogotá, Colombia. Te esperamos de martes a sábado entre las 10:00 y las 18:00, o escríbenos en la sección Contacto.';
+    if (texto.includes('ubicacion') || texto.includes('donde') || texto.includes('horario') || texto.includes('bogota') || texto.includes('contacto') || texto.includes('direccion') || texto.includes('correo')) {
+        return 'Nuestro Atelier está ubicado en la Cra. 11 # 84-12 en Bogotá, Colombia. Te esperamos de martes a sábado entre las 10:00 y las 18:00, o escríbenos a hola@trazoypiedra.com.';
     }
-    return 'Bienvenido al Atelier Trazo & Piedra, donde cada pieza se pinta y borda a mano para perdurar. Puedo asesorarte sobre nuestro catálogo de denim y prendas ($ 75.000 a $ 380.000), nuestros 4 servicios de personalización y restauración, o el cuidado de tus piezas. ¿Qué te gustaría explorar hoy?';
+    if (texto.includes('precio') || texto.includes('catalogo') || texto.includes('prenda') || texto.includes('producto') || texto.includes('tienen') || texto.includes('cuanto') || texto.includes('valor')) {
+        return 'En nuestro catálogo contamos con el Jean vintage Japanese Geisha ($ 120.000), Top Sol de Oro ($ 320.000), Chaqueta Denim Spider-Man ($ 380.000), Kit Cuidado Ecológico ($ 85.000) y el Tote Bag Naranjas en Flor ($ 75.000). Además, puedes usar el código TRAZO10 en tu bolsa para un 10% de descuento.';
+    }
+    return `Como estilista de Trazo & Piedra te cuento que trabajamos piezas únicas hechas a mano entre $ 75.000 y $ 380.000 (Jeans, Tops bordados en oro, Chaquetas pintadas y Bolsos), además de servicios de personalización y restauración a medida. ¿Te gustaría que te recomiende una prenda según tu estilo o presupuesto?`;
 }
 
 // 5. Ruta para el Chatbot con IA personalizada
@@ -120,30 +144,38 @@ app.post('/chat', async (req, res) => {
     };
 
     const urls = [
+        `https://aiplatform.googleapis.com/v1/publishers/google/models/gemini-2.5-flash-lite:generateContent?key=${API_KEY}`,
         `https://aiplatform.googleapis.com/v1/publishers/google/models/gemini-2.5-flash:generateContent?key=${API_KEY}`,
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`
+        `https://aiplatform.googleapis.com/v1/publishers/google/models/gemini-2.0-flash:generateContent?key=${API_KEY}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`
     ];
 
-    for (const endpoint of urls) {
-        try {
-            const respuesta = await fetch(endpoint, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
+    if (API_KEY) {
+        for (const endpoint of urls) {
+            try {
+                const respuesta = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
 
-            if (respuesta.ok) {
-                const datos = await respuesta.json();
-                const textoIA = datos?.candidates?.[0]?.content?.parts?.[0]?.text;
-                if (textoIA) {
-                    return res.json({ respuesta: textoIA });
+                if (respuesta.ok) {
+                    const datos = await respuesta.json();
+                    const textoIA = datos?.candidates?.[0]?.content?.parts?.[0]?.text;
+                    if (textoIA) {
+                        return res.json({ respuesta: textoIA });
+                    }
+                } else {
+                    const detalle = await respuesta.text();
+                    console.log(`Aviso API IA (${respuesta.status}):`, detalle.slice(0, 180));
                 }
+            } catch (err) {
+                console.log('Intento IA fallido:', err.message);
             }
-        } catch (err) {
-            console.log('Intento IA fallido:', err.message);
         }
     }
 
-    // Si la red externa no responde, responde con el conocimiento del Atelier
+    // Si la llave no está activa o la red externa falla, responde con el motor del Atelier
     return res.json({ respuesta: respuestaLocalAtelier(mensaje) });
 });

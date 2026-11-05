@@ -13,7 +13,7 @@ export default function Header({ ruta }) {
       </ul>
 
       <div className="logo">
-        <a href="#/"><img src="/imagenes/trazo-piedra-logo.png" alt="Trazo & Piedra Logo" /></a>
+        <a href="#/"><img src="imagenes/trazo-piedra-logo.png" alt="Trazo & Piedra Logo" /></a>
       </div>
 
       <ul className="nav-links">

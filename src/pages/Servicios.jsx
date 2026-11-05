@@ -15,7 +15,7 @@ export default function Servicios() {
         {/* 1. Pintura a mano */}
         <article className="servicio-card">
           <div className="icono-circulo">
-            <img src="/imagenes/pincel.svg" alt="Icono Pintura a mano" />
+            <img src="imagenes/pincel.svg" alt="Icono Pintura a mano" />
           </div>
           <h2 className="servicio-titulo">Pintura a mano</h2>
           <p className="servicio-descripcion">
@@ -28,7 +28,7 @@ export default function Servicios() {
         {/* 2. Bordado en oro */}
         <article className="servicio-card">
           <div className="icono-circulo">
-            <img src="/imagenes/bordado.svg" alt="Icono Bordado en oro" />
+            <img src="imagenes/bordado.svg" alt="Icono Bordado en oro" />
           </div>
           <h2 className="servicio-titulo">Bordado en oro</h2>
           <p className="servicio-descripcion">
@@ -41,7 +41,7 @@ export default function Servicios() {
         {/* 3. Modificación a medida */}
         <article className="servicio-card">
           <div className="icono-circulo">
-            <img src="/imagenes/tijeras.svg" alt="Icono Modificación a medida" />
+            <img src="imagenes/tijeras.svg" alt="Icono Modificación a medida" />
           </div>
           <h2 className="servicio-titulo">Modificación a medida</h2>
           <p className="servicio-descripcion">
@@ -53,7 +53,7 @@ export default function Servicios() {
         {/* 4. Restauración */}
         <article className="servicio-card">
           <div className="icono-circulo">
-            <img src="/imagenes/restauracion.svg" alt="Icono Restauración" />
+            <img src="imagenes/restauracion.svg" alt="Icono Restauración" />
           </div>
           <h2 className="servicio-titulo">Restauración</h2>
           <p className="servicio-descripcion">

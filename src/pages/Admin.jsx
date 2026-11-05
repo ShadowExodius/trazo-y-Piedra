@@ -63,7 +63,7 @@ export default function Admin() {
         <div className="admin-caja">
           <div className="admin-encabezado">
             <div className="icono-circulo icono-centrado">
-              <img src="/imagenes/candado.svg" alt="Icono Candado" />
+              <img src="imagenes/candado.svg" alt="Icono Candado" />
             </div>
             <h1 className="admin-titulo">Portal del Atelier</h1>
             <p className="admin-subtitulo">Acceso restringido al equipo de Trazo &amp; Piedra.</p>
