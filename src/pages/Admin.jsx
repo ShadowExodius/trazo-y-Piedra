@@ -43,7 +43,7 @@ export default function Admin() {
     setCargando(true)
     setErrorCarga('')
 
-    fetch('http://localhost:3000/contacto')
+    fetch('https://trazo-y-piedra.onrender.com/contacto')
       .then((respuesta) => {
         if (!respuesta.ok) throw new Error('Error al consultar')
         return respuesta.json()

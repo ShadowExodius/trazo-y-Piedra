@@ -64,7 +64,7 @@ export default function Contacto() {
 
     setCargando(true)
 
-    fetch('http://localhost:3000/contacto', {
+    fetch('https://trazo-y-piedra.onrender.com/contacto', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(nuevoMensaje),
