@@ -49,6 +49,10 @@ function respuestaAtelierLocal(pregunta = '') {
     return 'Como trabajamos piezas hechas a mano y series 1/1, adaptamos las tallas y siluetas a tu medida. Realizamos envíos a toda Colombia desde Bogotá y calculamos el envío y la personalización al finalizar tu pedido en Contacto.'
   }
 
+  if (texto.includes('cuidado') || texto.includes('cuido') || texto.includes('lavar') || texto.includes('kit') || texto.includes('conservar')) {
+    return 'Para conservar el trazo y el bordado recomendamos lavar a mano con agua fría, sin retorcer ni frotar la ilustración. Nuestro Kit Cuidado Ecológico ($ 85.000) está pensado especialmente para proteger cada pieza.'
+  }
+
   if (
     texto.includes('servicio') ||
     texto.includes('personaliza') ||
@@ -58,10 +62,6 @@ function respuestaAtelierLocal(pregunta = '') {
     texto.includes('medida')
   ) {
     return 'En el Atelier ofrecemos cuatro oficios artesanales: Pintura a mano sobre denim, Bordado en oro con mostacilla y cristal, Modificación a medida y Restauración de prendas heredadas. Puedes agendar tu consulta desde la sección Contacto.'
-  }
-
-  if (texto.includes('cuidado') || texto.includes('lavar') || texto.includes('kit') || texto.includes('conservar')) {
-    return 'Para conservar el trazo y el bordado recomendamos lavar a mano con agua fría, sin retorcer ni frotar la ilustración. Nuestro Kit Cuidado Ecológico ($ 85.000) está pensado especialmente para proteger cada pieza.'
   }
 
   if (texto.includes('descuento') || texto.includes('codigo') || texto.includes('promo')) {
@@ -125,6 +125,13 @@ export default function Chatbot() {
     setMensajes((prev) => [...prev, { autor: 'usuario', texto: pregunta }])
     setEntrada('')
     setCargando(true)
+
+    if (SUGERENCIAS.includes(pregunta)) {
+      await new Promise((r) => setTimeout(r, 350))
+      setMensajes((prev) => [...prev, { autor: 'ia', texto: respuestaAtelierLocal(pregunta) }])
+      setCargando(false)
+      return
+    }
 
     try {
       const res = await fetch('http://localhost:3000/chat', {

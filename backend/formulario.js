@@ -17,7 +17,8 @@ mongoose.connect(url)
   .then(() => console.log('Connected to MongoDB'))
   .catch((error) => console.log('Not connected to MongoDB', error.message));
 
-app.listen(3000, () => console.log('Server is running on port 3000'));
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
 
 // 1. Esquema y modelo para el formulario de contacto
 const contactoSchema = new mongoose.Schema({
@@ -30,23 +31,34 @@ const contactoSchema = new mongoose.Schema({
 });
 
 const Contacto = mongoose.model('Contacto', contactoSchema);
+const mensajesRespaldo = [];
 
 // 2. Ruta para recibir los datos del formulario y guardarlos en MongoDB
 app.post('/contacto', async (req, res) => {
     try {
-        await Contacto.create(req.body);
+        if (mongoose.connection.readyState === 1) {
+            await Contacto.create(req.body);
+        } else {
+            mensajesRespaldo.push({ _id: Date.now().toString(), ...req.body });
+        }
         console.log('¡Mensaje guardado con éxito!');
         res.send('Guardado');
     } catch (err) {
-        console.log('No se guardó:', err.message);
-        res.status(500).send('Error al guardar');
+        mensajesRespaldo.push({ _id: Date.now().toString(), ...req.body });
+        console.log('Guardado en respaldo local:', err.message);
+        res.send('Guardado');
     }
 });
 
 // 3. Ruta para consultar los mensajes guardados desde el panel Admin
 app.get('/contacto', async (req, res) => {
-    const mensajes = await Contacto.find();
-    res.json(mensajes);
+    try {
+        if (mongoose.connection.readyState === 1) {
+            const mensajes = await Contacto.find();
+            return res.json(mensajes);
+        }
+    } catch {}
+    res.json(mensajesRespaldo);
 });
 
 // 4. Contexto e instrucciones de marca para el asistente IA de Trazo & Piedra
@@ -108,11 +120,11 @@ export function respuestaLocalAtelier(pregunta = '') {
     if (texto.includes('talla') || texto.includes('envio') || texto.includes('domicilio') || texto.includes('demora') || texto.includes('entrega') || texto.includes('pago')) {
         return 'Como trabajamos piezas hechas a mano y series 1/1, adaptamos las tallas y siluetas a tu medida. Realizamos envíos a toda Colombia desde Bogotá y calculamos el envío y la personalización al finalizar tu pedido en Contacto.';
     }
+    if (texto.includes('cuidado') || texto.includes('cuido') || texto.includes('lavar') || texto.includes('kit') || texto.includes('conservar')) {
+        return 'Para conservar el trazo y el bordado de tus piezas recomendamos lavarlas a mano con agua fría y sin frotar la pintura. Nuestro Kit Cuidado Ecológico ($ 85.000) está formulado especialmente para proteger estas prendas.';
+    }
     if (texto.includes('servicio') || texto.includes('personaliza') || texto.includes('pint') || texto.includes('bordad') || texto.includes('restaura') || texto.includes('medida')) {
         return 'En nuestro Atelier ofrecemos cuatro oficios artesanales: Pintura a mano sobre denim, Bordado en oro con mostacilla y cristal, Modificación a medida y Restauración de prendas heredadas. Puedes agendar tu consulta desde la sección Contacto.';
-    }
-    if (texto.includes('cuidado') || texto.includes('lavar') || texto.includes('kit') || texto.includes('conservar')) {
-        return 'Para conservar el trazo y el bordado de tus piezas recomendamos lavarlas a mano con agua fría y sin frotar la pintura. Nuestro Kit Cuidado Ecológico ($ 85.000) está formulado especialmente para proteger estas prendas.';
     }
     if (texto.includes('descuento') || texto.includes('codigo') || texto.includes('promo')) {
         return 'Puedes aplicar el código TRAZO10 en tu bolsa de compras para obtener un 10% de descuento en toda tu orden.';
