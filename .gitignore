@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 .env
+Guia_Arquitectura_y_Asincronia.pdf
 
 # Editor directories and files
 .vscode/*

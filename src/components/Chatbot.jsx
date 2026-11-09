@@ -126,13 +126,6 @@ export default function Chatbot() {
     setEntrada('')
     setCargando(true)
 
-    if (SUGERENCIAS.includes(pregunta)) {
-      await new Promise((r) => setTimeout(r, 350))
-      setMensajes((prev) => [...prev, { autor: 'ia', texto: respuestaAtelierLocal(pregunta) }])
-      setCargando(false)
-      return
-    }
-
     try {
       const res = await fetch('https://trazo-y-piedra.onrender.com/chat', {
         method: 'POST',
