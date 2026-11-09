@@ -69,7 +69,7 @@ if (typeof process.loadEnvFile === 'function') {
 }
 const API_KEY = process.env.GEMINI_API_KEY || "";
 
-const CONTEXTO_MARCA = `Te llamas Aurora y eres la estilista virtual del Atelier "Trazo & Piedra" en Bogotá, Colombia.
+const CONTEXTO_MARCA = `Te llamas Aurora y eres la estilista virtual del Atelier "Trazo & Piedra" en Barranquilla, Colombia.
 Responde siempre en español, de forma breve (máximo 3 o 4 oraciones), cálida, elegante y artesanal.
 Lema de la marca: "Una pieza no se compra, se hereda."
 
@@ -87,7 +87,7 @@ Servicios del Atelier (se agendan en la sección Contacto):
 4. Restauración: zurcido visible y bordado de conservación para piezas heredadas.
 
 Información de contacto y beneficios:
-- Dirección: Cra. 11 # 84-12, Bogotá, Colombia.
+- Ubicación: Barranquilla, Colombia.
 - Horario: Martes a Sábado de 10:00 a 18:00.
 - Correo: hola@trazoypiedra.com
 - Código de descuento activo en la bolsa de compras: TRAZO10 (10% de descuento).`;
@@ -118,7 +118,7 @@ export function respuestaLocalAtelier(pregunta = '') {
         return 'Si buscas un detalle accesible y único, te sugiero el Tote Bag Naranjas en Flor ($ 75.000) o el Jean Japanese Geisha ($ 120.000). Si prefieres una pieza protagonista de alta costura artesanal, el Top Sol de Oro ($ 320.000) o la Chaqueta Denim ($ 380.000) son inolvidables.';
     }
     if (texto.includes('talla') || texto.includes('envio') || texto.includes('domicilio') || texto.includes('demora') || texto.includes('entrega') || texto.includes('pago')) {
-        return 'Como trabajamos piezas hechas a mano y series 1/1, adaptamos las tallas y siluetas a tu medida. Realizamos envíos a toda Colombia desde Bogotá y calculamos el envío y la personalización al finalizar tu pedido en Contacto.';
+        return 'Como trabajamos piezas hechas a mano y series 1/1, adaptamos las tallas y siluetas a tu medida. Realizamos envíos a toda Colombia desde Barranquilla y calculamos el envío y la personalización al finalizar tu pedido en Contacto.';
     }
     if (texto.includes('cuidado') || texto.includes('cuido') || texto.includes('lavar') || texto.includes('kit') || texto.includes('conservar')) {
         return 'Para conservar el trazo y el bordado de tus piezas recomendamos lavarlas a mano con agua fría y sin frotar la pintura. Nuestro Kit Cuidado Ecológico ($ 85.000) está formulado especialmente para proteger estas prendas.';
@@ -129,8 +129,8 @@ export function respuestaLocalAtelier(pregunta = '') {
     if (texto.includes('descuento') || texto.includes('codigo') || texto.includes('promo')) {
         return 'Puedes aplicar el código TRAZO10 en tu bolsa de compras para obtener un 10% de descuento en toda tu orden.';
     }
-    if (texto.includes('ubicacion') || texto.includes('donde') || texto.includes('horario') || texto.includes('bogota') || texto.includes('contacto') || texto.includes('direccion') || texto.includes('correo')) {
-        return 'Nuestro Atelier está ubicado en la Cra. 11 # 84-12 en Bogotá, Colombia. Te esperamos de martes a sábado entre las 10:00 y las 18:00, o escríbenos a hola@trazoypiedra.com.';
+    if (texto.includes('ubicacion') || texto.includes('donde') || texto.includes('horario') || texto.includes('barranquilla') || texto.includes('ciudad') || texto.includes('contacto') || texto.includes('direccion') || texto.includes('correo')) {
+        return 'Nuestro Atelier está ubicado en Barranquilla, Colombia. Te esperamos de martes a sábado entre las 10:00 y las 18:00, o escríbenos a hola@trazoypiedra.com.';
     }
     if (texto.includes('precio') || texto.includes('catalogo') || texto.includes('prenda') || texto.includes('producto') || texto.includes('tienen') || texto.includes('cuanto') || texto.includes('valor')) {
         return 'En nuestro catálogo contamos con el Jean vintage Japanese Geisha ($ 120.000), Top Sol de Oro ($ 320.000), Chaqueta Denim Spider-Man ($ 380.000), Kit Cuidado Ecológico ($ 85.000) y el Tote Bag Naranjas en Flor ($ 75.000). Además, puedes usar el código TRAZO10 en tu bolsa para un 10% de descuento.';

@@ -46,7 +46,7 @@ function respuestaAtelierLocal(pregunta = '') {
   }
 
   if (texto.includes('talla') || texto.includes('envio') || texto.includes('domicilio') || texto.includes('demora') || texto.includes('entrega') || texto.includes('pago')) {
-    return 'Como trabajamos piezas hechas a mano y series 1/1, adaptamos las tallas y siluetas a tu medida. Realizamos envíos a toda Colombia desde Bogotá y calculamos el envío y la personalización al finalizar tu pedido en Contacto.'
+    return 'Como trabajamos piezas hechas a mano y series 1/1, adaptamos las tallas y siluetas a tu medida. Realizamos envíos a toda Colombia desde Barranquilla y calculamos el envío y la personalización al finalizar tu pedido en Contacto.'
   }
 
   if (texto.includes('cuidado') || texto.includes('cuido') || texto.includes('lavar') || texto.includes('kit') || texto.includes('conservar')) {
@@ -72,12 +72,13 @@ function respuestaAtelierLocal(pregunta = '') {
     texto.includes('ubicacion') ||
     texto.includes('donde') ||
     texto.includes('horario') ||
-    texto.includes('bogota') ||
+    texto.includes('barranquilla') ||
+    texto.includes('ciudad') ||
     texto.includes('contacto') ||
     texto.includes('direccion') ||
     texto.includes('correo')
   ) {
-    return 'Nuestro Atelier está en la Cra. 11 # 84-12, Bogotá, Colombia. Atendemos de martes a sábado de 10:00 a 18:00 y por correo en hola@trazoypiedra.com.'
+    return 'Nuestro Atelier está en Barranquilla, Colombia. Atendemos de martes a sábado de 10:00 a 18:00 y por correo en hola@trazoypiedra.com.'
   }
 
   if (

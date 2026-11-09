@@ -103,7 +103,7 @@ export default function Contacto() {
           <div className="info-bloques">
             <div className="info-item">
               <h3>ATELIER</h3>
-              <p>Cra. 11 # 84-12, Bogotá, Colombia</p>
+              <p>Barranquilla, Colombia</p>
             </div>
             <div className="info-item">
               <h3>CORREO</h3>
