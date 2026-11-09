@@ -113,6 +113,11 @@ export default function Chatbot() {
     finMensajesRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [mensajes, cargando])
 
+  // Despertar el servidor gratuito de Render en segundo plano al cargar la página
+  useEffect(() => {
+    fetch('https://trazo-y-piedra.onrender.com/contacto').catch(() => {})
+  }, [])
+
   const enviarConsulta = async (textoConsulta) => {
     const pregunta = textoConsulta.trim()
     setError('')
@@ -131,6 +136,7 @@ export default function Chatbot() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ mensaje: pregunta }),
+        signal: AbortSignal.timeout(8000),
       })
 
       if (!res.ok) {
