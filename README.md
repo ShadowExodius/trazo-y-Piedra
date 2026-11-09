@@ -1,6 +1,6 @@
 # Trazo & Piedra (React + Vite)
 
-Versión en React del sitio: Home, Catálogo (con filtros) y Contacto (con validación).
+Sitio Full Stack en React y Express: Home, Catálogo (con filtros y bolsa de compras), Servicios, Contacto (conectado a MongoDB Atlas), Panel Admin y Estilista IA (Aurora).
 
 ## Uso
 
@@ -13,13 +13,10 @@ npm run build    # producción (carpeta dist/)
 
 ## Estructura
 
-- `src/` Frontend en React (páginas, componentes, hooks, datos y estilos)
-- `backend/` Servidor Express, conexión a MongoDB y ruta de IA (`backend/formulario.js` y `backend/usuario.js`)
-
-- `src/pages/` Home, Catalogo, Contacto
-- `src/components/` Header, Footer, ProductCard, FormField, Bolsa (panel lateral del carrito)
-- `src/data/productos.js` productos y categorías y códigos de descuento (edita aquí para agregar prendas o códigos)
-- `src/hooks/useBolsa.js` hook de la bolsa; el estado vive en `src/components/BolsaProvider.jsx` (conectado al catálogo, se guarda en localStorage)
-- `src/hooks/useHashRoute.js` router mínimo por hash (`#/catalogo`), sin dependencias
-- `src/styles/global.css` estilos unificados (misma paleta y tipografías originales)
-- `public/imagenes/` imágenes (nombres en minúscula y sin espacios)
+- `src/pages/` Home, Catalogo, Servicios, Contacto, Admin
+- `src/components/` Header, Footer, ProductCard, Bolsa, BolsaProvider, Chatbot, AccessibilityWidget
+- `src/data/productos.js` productos, categorías y códigos de descuento
+- `src/hooks/` `useBolsa.js`, `bolsaContext.js` y `useHashRoute.js`
+- `src/styles/global.css` estilos unificados y responsive
+- `public/imagenes/` recursos gráficos del Atelier
+- `backend/formulario.js` servidor Express, autenticación Admin, conexión a MongoDB y ruta de IA (`/chat`)

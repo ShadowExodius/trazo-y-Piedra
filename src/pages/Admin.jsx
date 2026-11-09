@@ -29,28 +29,31 @@ export default function Admin() {
 
     if (!valido) return
 
-    // Validar que sea el usuario y contraseña de Dafne o de Angel
-    const correoLimpio = correo.trim().toLowerCase()
-    const esDafne = correoLimpio === 'dafne@trazoypiedra.com' && password === 'dafne1234'
-    const esAngel = correoLimpio === 'angel@trazoypiedra.com' && password === 'angel1234'
-
-    if (!esDafne && !esAngel) {
-      setErrorPassword('Correo o contraseña incorrectos.')
-      return
-    }
-
-    setAutenticado(true)
     setCargando(true)
     setErrorCarga('')
 
-    fetch('https://trazo-y-piedra.onrender.com/contacto')
+    // Validar las credenciales en el servidor Backend
+    fetch('https://trazo-y-piedra.onrender.com/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ correo, password }),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error('Credenciales inválidas')
+        setAutenticado(true)
+        return fetch('https://trazo-y-piedra.onrender.com/contacto')
+      })
       .then((respuesta) => {
         if (!respuesta.ok) throw new Error('Error al consultar')
         return respuesta.json()
       })
       .then((datos) => setMensajes(datos))
-      .catch(() => {
-        setErrorCarga('No se pudieron cargar los mensajes. Verifica que el servidor esté encendido.')
+      .catch((err) => {
+        if (err.message === 'Credenciales inválidas') {
+          setErrorPassword('Correo o contraseña incorrectos.')
+        } else {
+          setErrorPassword('No se pudo conectar con el servidor.')
+        }
       })
       .finally(() => {
         setCargando(false)
@@ -93,7 +96,9 @@ export default function Admin() {
               {errorPassword && <span className="error-texto activo">{errorPassword}</span>}
             </div>
 
-            <button type="submit" className="btn-ingresar">INGRESAR</button>
+            <button type="submit" className="btn-ingresar" disabled={cargando}>
+              {cargando ? 'VALIDANDO...' : 'INGRESAR'}
+            </button>
           </form>
         </div>
       ) : (

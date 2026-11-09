@@ -1,21 +1,31 @@
 import express from 'express';
 import mongoose from 'mongoose';
 
+// Cargar variables de entorno desde .env si existe localmente
+if (typeof process.loadEnvFile === 'function') {
+    try { process.loadEnvFile('.env'); } catch {
+        try { process.loadEnvFile('../.env'); } catch {}
+    }
+}
+
 const app = express();
 app.use(express.json());
 
-// Permitir que el formulario envíe datos al servidor
+// Permitir que el frontend envíe y consulte datos al servidor
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     next();
 });
 
-const url = "mongodb+srv://shadowexodius:1130270945@cluster0.akadhof.mongodb.net/";
+const url = process.env.MONGO_URL || "";
+const API_KEY = process.env.GEMINI_API_KEY || "";
 
-mongoose.connect(url)
-  .then(() => console.log('Connected to MongoDB'))
-  .catch((error) => console.log('Not connected to MongoDB', error.message));
+if (url) {
+    mongoose.connect(url)
+      .then(() => console.log('Connected to MongoDB'))
+      .catch((error) => console.log('Not connected to MongoDB', error.message));
+}
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
@@ -33,7 +43,22 @@ const contactoSchema = new mongoose.Schema({
 const Contacto = mongoose.model('Contacto', contactoSchema);
 const mensajesRespaldo = [];
 
-// 2. Ruta para recibir los datos del formulario y guardarlos en MongoDB
+// 2. Ruta para validar el login del panel de Administrador en el Backend
+app.post('/login', (req, res) => {
+    const { correo = '', password = '' } = req.body || {};
+    const correoLimpio = correo.trim().toLowerCase();
+
+    const esDafne = correoLimpio === 'dafne@trazoypiedra.com' && password === 'dafne1234';
+    const esAngel = correoLimpio === 'angel@trazoypiedra.com' && password === 'angel1234';
+
+    if (!esDafne && !esAngel) {
+        return res.status(401).json({ ok: false, error: 'Correo o contraseña incorrectos.' });
+    }
+
+    return res.json({ ok: true });
+});
+
+// 3. Ruta para recibir los datos del formulario y guardarlos en MongoDB
 app.post('/contacto', async (req, res) => {
     try {
         if (mongoose.connection.readyState === 1) {
@@ -50,7 +75,7 @@ app.post('/contacto', async (req, res) => {
     }
 });
 
-// 3. Ruta para consultar los mensajes guardados desde el panel Admin
+// 4. Ruta para consultar los mensajes guardados desde el panel Admin
 app.get('/contacto', async (req, res) => {
     try {
         if (mongoose.connection.readyState === 1) {
@@ -61,14 +86,7 @@ app.get('/contacto', async (req, res) => {
     res.json(mensajesRespaldo);
 });
 
-// 4. Contexto e instrucciones de marca para el asistente IA de Trazo & Piedra
-if (typeof process.loadEnvFile === 'function') {
-    try { process.loadEnvFile('.env'); } catch {
-        try { process.loadEnvFile('../.env'); } catch {}
-    }
-}
-const API_KEY = process.env.GEMINI_API_KEY || "";
-
+// 5. Contexto e instrucciones de marca para el asistente IA de Trazo & Piedra
 const CONTEXTO_MARCA = `Te llamas Aurora y eres la estilista virtual del Atelier "Trazo & Piedra" en Barranquilla, Colombia.
 Responde siempre en español, de forma breve (máximo 3 o 4 oraciones), cálida, elegante y artesanal.
 Lema de la marca: "Una pieza no se compra, se hereda."
@@ -138,7 +156,7 @@ export function respuestaLocalAtelier(pregunta = '') {
     return `Como estilista de Trazo & Piedra te cuento que trabajamos piezas únicas hechas a mano entre $ 75.000 y $ 380.000 (Jeans, Tops bordados en oro, Chaquetas pintadas y Bolsos), además de servicios de personalización y restauración a medida. ¿Te gustaría que te recomiende una prenda según tu estilo o presupuesto?`;
 }
 
-// 5. Ruta para el Chatbot con IA personalizada
+// 6. Ruta para el Chatbot con IA personalizada
 app.post('/chat', async (req, res) => {
     const { mensaje } = req.body || {};
 
