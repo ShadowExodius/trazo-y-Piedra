@@ -59,7 +59,7 @@ export default function Bolsa() {
                     <div className="bolsa-cantidad">
                       <button type="button" onClick={() => cambiarCantidad(item.id, item.cantidad - 1)} disabled={item.cantidad <= 1}>−</button>
                       <span>{item.cantidad}</span>
-                      <button type="button" onClick={() => cambiarCantidad(item.id, item.cantidad + 1)}>+</button>
+                      <button type="button" onClick={() => cambiarCantidad(item.id, item.cantidad + 1)} disabled={item.cantidad >= 20}>+</button>
                     </div>
                   </div>
 

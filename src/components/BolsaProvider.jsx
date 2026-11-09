@@ -10,12 +10,13 @@ export default function BolsaProvider({ children }) {
   const abrirBolsa = () => setAbierta(true)
   const cerrarBolsa = () => setAbierta(false)
 
-  // Agregar un producto a la bolsa
+  // Agregar un producto a la bolsa (máximo 20 unidades por prenda)
   const agregar = (id) => {
     const producto = productos.find((p) => p.id === id)
     const existe = items.find((i) => i.id === id)
 
     if (existe) {
+      if (existe.cantidad >= 20) return
       setItems(items.map((i) => (i.id === id ? { ...i, cantidad: i.cantidad + 1 } : i)))
     } else {
       setItems([...items, { ...producto, cantidad: 1 }])
@@ -25,7 +26,7 @@ export default function BolsaProvider({ children }) {
 
   // Cambiar la cantidad de un producto (+ / -)
   const cambiarCantidad = (id, nuevaCantidad) => {
-    if (nuevaCantidad < 1) return
+    if (nuevaCantidad < 1 || nuevaCantidad > 20) return
     setItems(items.map((i) => (i.id === id ? { ...i, cantidad: nuevaCantidad } : i)))
   }
 

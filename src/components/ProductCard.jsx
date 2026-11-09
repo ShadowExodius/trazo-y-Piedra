@@ -2,7 +2,9 @@ import { formatoPrecio } from '../data/productos.js'
 import { useBolsa } from '../hooks/useBolsa.js'
 
 export default function ProductCard({ producto }) {
-  const { agregar } = useBolsa()
+  const { items, agregar } = useBolsa()
+  const enBolsa = items.find((i) => i.id === producto.id)
+  const agotado = enBolsa && enBolsa.cantidad >= 20
 
   return (
     <article className="product-card">
@@ -16,8 +18,13 @@ export default function ProductCard({ producto }) {
           <span className="product-name">{producto.nombre}</span>
           <span className="product-price">{formatoPrecio(producto.precio)}</span>
         </div>
-        <button type="button" className="btn-agregar" onClick={() => agregar(producto.id)}>
-          Agregar a la bolsa
+        <button
+          type="button"
+          className="btn-agregar"
+          onClick={() => agregar(producto.id)}
+          disabled={agotado}
+        >
+          {agotado ? 'Agotado' : 'Agregar a la bolsa'}
         </button>
       </div>
     </article>
