@@ -15,8 +15,7 @@ export default function Footer() {
           <ul>
             <li><a href="#/catalogo">Catálogo</a></li>
             <li><a href="#/servicios">Personalización</a></li>
-            <li><a href="#/">Cuidado de la prenda</a></li>
-            <li><a href="#/">Historia</a></li>
+            <li><a href="#/servicios">Cuidado de la prenda</a></li>
           </ul>
         </div>
 
